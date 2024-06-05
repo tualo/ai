@@ -10,7 +10,7 @@ BEGIN
         update 
             questions
         set ai_result = JSON_Value( request, "$.choices[0].message.content" )
-        where id = JSON_Value( request, "$.id" )
+        where id = JSON_Value( request, "$.id" );
 
     END IF;
 

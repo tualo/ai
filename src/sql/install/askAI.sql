@@ -11,7 +11,7 @@ BEGIN
         concat('Bitte bewerte den Schwierigkeitsgrad der Aufgabe, gibt dafür nur leicht, mittel oder schwer zurück: ',char(10),char(10), question)
         into response
         from questions
-        where id = JSON_Value( request, "$.id" )
+        where id = JSON_Value( request, "$.id" );
 
     END IF;
 
