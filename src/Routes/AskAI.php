@@ -35,10 +35,10 @@ class AskAI implements IRoute{
                     'presence_penalty' => 0,
                 ]);
                 $chatResult = json_decode($chat,true);
+                App::result('chat',$chatResult);
 
                 $db->direct('call askAIResult(@currentRequest,@result)',[ ]);
 
-                App::result('chat',$chatResult);
  
                 
             }catch(\Exception $e){
