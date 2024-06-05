@@ -9,7 +9,7 @@ BEGIN
     IF @tn = 'questions' THEN
         update 
             questions
-        set ai_result = JSON_Value( request, "$.choices[0].message.content" )
+        set ai_result = JSON_Value( result, "$.choices[0].message.content" )
         where id = JSON_Value( request, "$.id" );
 
     END IF;

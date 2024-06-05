@@ -36,6 +36,7 @@ class AskAI implements IRoute{
                 ]);
                 $chatResult = json_decode($chat,true);
                 App::result('chat',$chatResult);
+                $db->direct('set @result = {result}',['result'=>json_encode($chatResult)]);
 
                 $db->direct('call askAIResult(@currentRequest,@result)',[ ]);
                 App::result('success', true);
