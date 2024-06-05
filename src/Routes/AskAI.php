@@ -38,6 +38,7 @@ class AskAI implements IRoute{
                 App::result('chat',$chatResult);
 
                 $db->direct('call askAIResult(@currentRequest,@result)',[ ]);
+                App::result('success', true);
 
  
                 
