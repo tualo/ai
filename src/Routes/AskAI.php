@@ -5,7 +5,7 @@ use Tualo\Office\Basic\Route;
 use Tualo\Office\Basic\IRoute;
 
 use Orhanerday\OpenAi\OpenAi;
-class Test implements IRoute{
+class AskAI implements IRoute{
     
     public static function register(){
 
