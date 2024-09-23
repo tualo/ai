@@ -1,5 +1,5 @@
 <?php
-namespace Tualo\Office\D3Chart;
+namespace Tualo\Office\AI;
 
 use Tualo\Office\Basic\TualoApplication;
 use Tualo\Office\ExtJSCompiler\ICompiler;
