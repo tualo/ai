@@ -6,3 +6,4 @@ require_once "Commandline/Install.php";
 
 require_once __DIR__.'/Routes/Test.php';
 require_once __DIR__.'/Routes/AskAI.php';
+require_once __DIR__.'/Routes/Ollama.php';
