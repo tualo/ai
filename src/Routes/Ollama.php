@@ -1,5 +1,7 @@
 <?php
+
 namespace Tualo\Office\AI\Routes;
+
 use Tualo\Office\Basic\TualoApplication as App;
 use Tualo\Office\Basic\Route;
 use Tualo\Office\Basic\IRoute;
@@ -7,11 +9,13 @@ use Tualo\Office\Basic\IRoute;
 use Orhanerday\OpenAi\OpenAi;
 use ArdaGnsrn\Ollama\Ollama;
 
-class OllamaRoute implements IRoute{
-    
-    public static function register(){
+class OllamaRoute extends \Tualo\Office\Basic\RouteWrapper
+{
 
-        Route::add('/ol/test',function(){
+    public static function register()
+    {
+
+        Route::add('/ol/test', function () {
             $db = App::get('session')->getDB();
             App::contenttype('application/json');
             try {
@@ -20,31 +24,31 @@ class OllamaRoute implements IRoute{
                 $response = $client->chat()->create([
                     'model' => 'llama3.2',
 
-                    "stream"=> false,
-                    
-                    "format"=>[
-                        "type"=> "object",
-                        "properties"=> [
-                        "reportnumber"=> [
-                            "type"=> "string"
-                        ],
-                        "reportdate"=> [
-                            "type"=> "string"
-                        ],
-                        "ordernumber"=> [
-                            "type"=> "string"
-                        ],
-                        "currency"=> [
-                            "type"=> "string"
-                        ],
-                        "gross"=> [
-                            "type"=> "string"
-                        ],
-                        "net"=> [
-                            "type"=> "string"
-                        ],
-                        "duedate"=> [
-                            "type"=> "string"
+                    "stream" => false,
+
+                    "format" => [
+                        "type" => "object",
+                        "properties" => [
+                            "reportnumber" => [
+                                "type" => "string"
+                            ],
+                            "reportdate" => [
+                                "type" => "string"
+                            ],
+                            "ordernumber" => [
+                                "type" => "string"
+                            ],
+                            "currency" => [
+                                "type" => "string"
+                            ],
+                            "gross" => [
+                                "type" => "string"
+                            ],
+                            "net" => [
+                                "type" => "string"
+                            ],
+                            "duedate" => [
+                                "type" => "string"
                             ]
                         ],
                         "required" => [
@@ -57,7 +61,7 @@ class OllamaRoute implements IRoute{
                             "duedate"
                         ],
                     ],
-                    
+
                     'messages' => [
                         ['role' => 'user', 'content' => 'Ich benötige Informationen zu einer Rechnung.'],
                         ['role' => 'user', 'content' => 'Diese benötige ich im JSON Format mit folgdenen Rückgabefeldern.
@@ -154,12 +158,10 @@ Google Workspace Business Plus                   Vereinbarung           1. Okt. 
                 ]);
                 */
 
-                App::result('completions', $response->toArray() );
- 
-                
-            }catch(\Exception $e){
+                App::result('completions', $response->toArray());
+            } catch (\Exception $e) {
                 App::result('msg', $e->getMessage());
             }
-        },array('get'),true);
+        }, array('get'), true);
     }
 }

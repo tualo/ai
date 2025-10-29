@@ -1,25 +1,30 @@
 <?php
+
 namespace Tualo\Office\AI\Routes;
+
 use Tualo\Office\Basic\TualoApplication as App;
 use Tualo\Office\Basic\Route;
 use Tualo\Office\Basic\IRoute;
 
 use Orhanerday\OpenAi\OpenAi;
-class Test implements IRoute{
-    
-    public static function register(){
 
-        Route::add('/ai/hello',function(){
+class Test extends \Tualo\Office\Basic\RouteWrapper
+{
+
+    public static function register()
+    {
+
+        Route::add('/ai/hello', function () {
             $db = App::get('session')->getDB();
             App::contenttype('application/json');
             try {
 
-                $open_ai_key = App::configuration('openai','key');
+                $open_ai_key = App::configuration('openai', 'key');
                 $open_ai = new OpenAi($open_ai_key);
                 $chat = $open_ai->chat([
                     'model' => 'gpt-3.5-turbo',
                     'messages' => [
-                        
+
                         /*[
                             "role" => "system",
                             "content" => "You are a helpful assistant."
@@ -63,12 +68,10 @@ class Test implements IRoute{
                     'frequency_penalty' => 0,
                     'presence_penalty' => 0,
                 ]);
-                App::result('chat',json_decode($chat,true));
- 
-                
-            }catch(\Exception $e){
+                App::result('chat', json_decode($chat, true));
+            } catch (\Exception $e) {
                 App::result('msg', $e->getMessage());
             }
-        },array('get'),true);
+        }, array('get'), true);
     }
 }
